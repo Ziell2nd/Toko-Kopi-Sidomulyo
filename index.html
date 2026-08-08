@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Toko Kopi Sidomulyo — Sejak 1968</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -62,7 +63,7 @@
     display:flex; align-items:center; justify-content:center;
     position:relative;
   }
-  .brand-mark svg{width:20px; height:20px;}
+  .brand-mark img{width:19px; height:auto;}
   .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:19px; line-height:1.1;}
   .brand-name small{display:block; font-family:'Inter',sans-serif; font-size:10px; letter-spacing:.2em; color:var(--muted); font-weight:600; text-transform:uppercase; margin-bottom:2px;}
 
@@ -177,10 +178,11 @@
   .feat-icon{
     width:52px; height:52px; border-radius:50%;
     background:var(--forest);
+    color:var(--gold-2);
     display:flex; align-items:center; justify-content:center;
     margin-bottom:20px;
   }
-  .feat-icon svg{width:24px; height:24px; stroke:var(--gold-2);}
+  .feat-icon svg{width:24px; height:24px; stroke:currentColor;}
   .feat-card h3{font-size:17px; margin-bottom:8px;}
   .feat-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
 
@@ -379,7 +381,7 @@
   <div class="wrap nav">
     <div class="brand">
       <div class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M8 2c0 3 3 4 3 7a3 3 0 1 1-6 0c0-3 3-4 3-7Z" stroke="#E8C77E" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 6c0 2 2 2.6 2 4.6A2 2 0 1 1 12 10.6c0-2 2-2.6 2-4.6Z" stroke="#E8C77E" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        <img src="images/logo-light.png" alt="Logo Sidomulyo">
       </div>
       <div class="brand-name">Sidomulyo<small>Toko Kopi · Sejak 1968</small></div>
     </div>
@@ -671,7 +673,7 @@
 <section class="about" id="tentang">
   <div class="wrap about-grid">
     <div class="about-media">
-      <img src="images/proses.png" alt="Proses Sangrai Kopi Sidomulyo">
+      <img src="images/roasted-bean-robusta-malang.png" alt="Proses Sangrai Kopi Sidomulyo">
     </div>
     <div>
       <div class="eyebrow">Cerita Kami</div>
@@ -740,7 +742,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M8 2c0 3 3 4 3 7a3 3 0 1 1-6 0c0-3 3-4 3-7Z" stroke="#E8C77E" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <div class="brand-mark"><img src="images/logo-light.png" alt="Logo Sidomulyo"></div>
           <div class="brand-name">Sidomulyo</div>
         </div>
         <p class="desc">Toko Kopi Sidomulyo — produsen kopi asli Malang sejak 1968. Kualitas terjamin, rasa istimewa di setiap kemasan.</p>
