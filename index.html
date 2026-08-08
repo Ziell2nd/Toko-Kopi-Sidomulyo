@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toko Kopi Sidomulyo — Sejak 1968</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F3EAD6;
+    --cream-2:#EADFC5;
+    --ink:#241A12;
+    --forest:#1E3327;
+    --forest-2:#16261D;
+    --coffee:#2A1810;
+    --coffee-2:#1B0F0A;
+    --gold:#C89A46;
+    --gold-2:#E8C77E;
+    --muted:#6B5D48;
+    --line: rgba(36,26,18,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-.01em; color:var(--ink);}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,234,214,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    height:78px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--forest);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .brand-mark svg{width:20px; height:20px;}
+  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:19px; line-height:1.1;}
+  .brand-name small{display:block; font-family:'Inter',sans-serif; font-size:10px; letter-spacing:.2em; color:var(--muted); font-weight:600; text-transform:uppercase; margin-bottom:2px;}
+
+  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links a{
+    font-size:14px; font-weight:600; color:var(--ink); opacity:.75;
+    position:relative; padding:4px 0;
+    transition:opacity .2s;
+  }
+  nav.links a:hover{opacity:1;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px;
+    font-weight:700; font-size:13.5px; letter-spacing:.01em;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary{background:var(--forest); color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 24px -8px rgba(30,51,39,.55);}
+  .btn-outline{border-color:var(--ink); color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--cream);}
+  .btn-gold{background:var(--gold); color:var(--coffee-2);}
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 10px 24px -8px rgba(200,154,70,.6);}
+
+  .mobile-toggle{display:none;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:64px 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;
+    padding-bottom:60px;
+  }
+  .hero-eyebrow{margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(40px, 5.4vw, 68px);
+    line-height:1.02;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--forest);
+    display:block;
+  }
+  .hero p.lead{
+    font-size:17px; line-height:1.7; color:var(--muted);
+    max-width:480px; margin-bottom:32px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+  .hero-stats{display:flex; gap:36px; padding-top:26px; border-top:1px solid var(--line);}
+  .hero-stats div{display:flex; flex-direction:column;}
+  .hero-stats .num{font-family:'Fraunces', serif; font-size:30px; font-weight:600; color:var(--forest);}
+  .hero-stats .label{font-size:12.5px; color:var(--muted); font-weight:600;}
+
+  .hero-banner{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(30,20,12,.35);
+    border:1px solid rgba(30,51,39,.15);
+  }
+  .hero-banner img{width:100%; height:100%; object-fit:cover;}
+
+  /* ===== MARQUEE STRIP ===== */
+  .strip{
+    background:var(--forest);
+    color:var(--cream-2);
+    padding:14px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .strip .track{
+    display:inline-flex;
+    gap:48px;
+    animation:scroll 32s linear infinite;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:16px;
+    letter-spacing:.02em;
+  }
+  .strip .track span{opacity:.85;}
+  .strip .track .dot{color:var(--gold); opacity:1; font-style:normal;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ===== FEATURES ===== */
+  .features{padding:88px 0 20px;}
+  .section-head{max-width:620px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(30px,3.4vw,42px); line-height:1.12;}
+  .section-head p{color:var(--muted); font-size:15.5px; margin-top:14px; line-height:1.7;}
+
+  .feat-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  }
+  .feat-card{
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px 26px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .feat-card:hover{transform:translateY(-4px); box-shadow:0 18px 30px -14px rgba(36,26,18,.18);}
+  .feat-icon{
+    width:52px; height:52px; border-radius:50%;
+    background:var(--forest);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .feat-icon svg{width:24px; height:24px; stroke:var(--gold-2);}
+  .feat-card h3{font-size:17px; margin-bottom:8px;}
+  .feat-card p{font-size:13.5px; color:var(--muted); line-height:1.6;}
+
+  /* ===== CATALOG ===== */
+  .catalog{padding:100px 0;}
+  .catalog-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:56px; gap:24px; flex-wrap:wrap;
+  }
+  .filter-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .chip{
+    padding:9px 16px; border-radius:999px;
+    border:1px solid var(--line);
+    font-size:12.5px; font-weight:700;
+    background:var(--cream);
+    cursor:pointer;
+    transition:all .18s ease;
+  }
+  .chip.active, .chip:hover{background:var(--forest); color:var(--cream); border-color:var(--forest);}
+
+  .product-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(258px,1fr)); gap:26px;
+  }
+  .card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    display:flex; flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .card:hover{transform:translateY(-6px); box-shadow:0 26px 40px -18px rgba(36,26,18,.28);}
+  .card-media{
+    position:relative;
+    aspect-ratio:3/4;
+    background:linear-gradient(160deg,#efe6d2,#ded1b0);
+    overflow:hidden;
+  }
+  .card-media img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .card:hover .card-media img{transform:scale(1.06);}
+  .card-tag{
+    position:absolute; top:14px; left:14px;
+    display:flex; align-items:center; gap:7px;
+    background:rgba(36,26,18,.72);
+    backdrop-filter:blur(4px);
+    color:#fff; font-size:11px; font-weight:700;
+    padding:6px 12px; border-radius:999px;
+    letter-spacing:.03em;
+  }
+  .swatch{width:9px; height:9px; border-radius:50%; flex:none;}
+  .card-netto{
+    position:absolute; bottom:14px; right:14px;
+    background:var(--gold);
+    color:var(--coffee-2);
+    font-size:11.5px; font-weight:800;
+    padding:6px 12px; border-radius:999px;
+  }
+  .card-body{padding:20px 20px 22px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .card-origin{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);}
+  .card-body h3{font-size:19px; line-height:1.25;}
+  .card-body p{font-size:13px; color:var(--muted); line-height:1.55; flex:1;}
+  .card-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:12px; border-top:1px solid var(--line);
+  }
+  .card-foot .roast{font-size:11.5px; font-weight:700; color:var(--forest);}
+  .card-cta{
+    display:flex; align-items:center; gap:6px;
+    font-size:12.5px; font-weight:800; color:var(--forest);
+  }
+  .card-cta svg{width:14px; height:14px;}
+
+  /* ===== ABOUT ===== */
+  .about{
+    background:var(--coffee);
+    color:var(--cream);
+    padding:110px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .about::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 82% 18%, rgba(200,154,70,.18), transparent 45%);
+    pointer-events:none;
+  }
+  .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:center;}
+  .about-media{
+    border-radius:20px; overflow:hidden;
+    border:1px solid rgba(232,199,126,.25);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  }
+  .about .eyebrow{color:var(--gold-2);}
+  .about h2{color:var(--cream); font-size:clamp(30px,3.6vw,44px); margin:16px 0 22px; line-height:1.14;}
+  .about p{color:rgba(243,234,214,.75); font-size:15.5px; line-height:1.8; margin-bottom:18px;}
+  .about-list{list-style:none; margin-top:28px; display:flex; flex-direction:column; gap:16px;}
+  .about-list li{display:flex; gap:14px; align-items:flex-start; font-size:14.5px; color:rgba(243,234,214,.9);}
+  .about-list .num{
+    font-family:'Fraunces', serif; font-style:italic; color:var(--gold-2);
+    font-size:15px; flex:none; width:26px;
+  }
+
+  /* ===== TESTIMONI ===== */
+  .testi{padding:100px 0;}
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .testi-card{
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px;
+  }
+  .stars{color:var(--gold); font-size:14px; margin-bottom:16px; letter-spacing:2px;}
+  .testi-card p{font-size:14.5px; line-height:1.7; color:var(--ink); margin-bottom:20px;}
+  .testi-who{display:flex; align-items:center; gap:12px;}
+  .testi-avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--forest); color:var(--gold-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:15px;
+  }
+  .testi-who .name{font-size:13.5px; font-weight:700;}
+  .testi-who .loc{font-size:12px; color:var(--muted);}
+
+  /* ===== CTA BAND ===== */
+  .cta-band{
+    background:var(--forest);
+    color:var(--cream);
+    border-radius:26px;
+    margin:0 auto 100px;
+    max-width:1180px;
+    padding:64px 60px;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+    flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-band::after{
+    content:"☕";
+    position:absolute; right:-10px; bottom:-40px;
+    font-size:220px; opacity:.06; transform:rotate(-12deg);
+  }
+  .cta-band h2{color:var(--cream); font-size:clamp(26px,3vw,36px); max-width:520px; line-height:1.2;}
+  .cta-band p{color:rgba(243,234,214,.7); margin-top:12px; font-size:14.5px; max-width:480px;}
+  .cta-band-actions{display:flex; gap:14px; flex-wrap:wrap; position:relative; z-index:1;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--coffee-2); color:rgba(243,234,214,.7); padding:70px 0 30px;}
+  .foot-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;
+    padding-bottom:50px; border-bottom:1px solid rgba(243,234,214,.12);
+  }
+  .foot-brand{display:flex; gap:12px; align-items:center; margin-bottom:16px;}
+  .foot-brand .brand-name{color:var(--cream);}
+  footer p.desc{font-size:13.5px; line-height:1.7; max-width:280px;}
+  footer h4{color:var(--cream); font-size:13px; text-transform:uppercase; letter-spacing:.12em; margin-bottom:18px;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:11px;}
+  footer ul a{font-size:13.5px; transition:color .2s;}
+  footer ul a:hover{color:var(--gold-2);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; padding-top:26px; font-size:12.5px; flex-wrap:wrap; gap:10px;
+  }
+
+  /* whatsapp float */
+  .wa-float{
+    position:fixed; right:24px; bottom:24px; z-index:60;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -8px rgba(37,211,102,.6);
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px; height:28px; fill:#fff;}
+
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .about-grid{grid-template-columns:1fr;}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    nav.links{display:none;}
+    .cta-band{padding:48px 30px;}
+  }
+  @media (max-width: 600px){
+    .feat-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:22px; flex-wrap:wrap;}
+    .catalog-head{flex-direction:column; align-items:flex-start;}
+    .cta-band{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 2c0 3 3 4 3 7a3 3 0 1 1-6 0c0-3 3-4 3-7Z" stroke="#E8C77E" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 6c0 2 2 2.6 2 4.6A2 2 0 1 1 12 10.6c0-2 2-2.6 2-4.6Z" stroke="#E8C77E" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-name">Sidomulyo<small>Toko Kopi · Sejak 1968</small></div>
+    </div>
+    <nav class="links">
+      <a href="#beranda">Beranda</a>
+      <a href="#katalog">Katalog</a>
+      <a href="#tentang">Tentang Kami</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <a class="btn btn-primary" href="https://wa.me/6280000000000" target="_blank" rel="noopener">
+      Chat WhatsApp
+    </a>
+  </div>
+</header>
+
+<section class="hero" id="beranda">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow hero-eyebrow">Kualitas Terjamin, Rasa Istimewa</div>
+      <h1>Kopi asli dataran tinggi Nusantara,<em>diracik sejak 1968.</em></h1>
+      <p class="lead">Dari kebun Malang, Kintamani, Gayo, hingga Ijen — Sidomulyo menyangrai setiap biji kopi pilihan dengan tangan berpengalaman, menjaga cita rasa dan aroma yang otentik di setiap kemasan.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#katalog">Lihat Semua Varian</a>
+        <a class="btn btn-outline" href="#tentang">Cerita Kami</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="num">10+</span><span class="label">Varian Kopi Pilihan</span></div>
+        <div><span class="num">57</span><span class="label">Tahun Berkarya</span></div>
+        <div><span class="num">100%</span><span class="label">Murni Tanpa Campuran</span></div>
+      </div>
+    </div>
+    <div class="hero-banner">
+      <img src="images/banner-cream.png" alt="Toko Kopi Sidomulyo">
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="track">
+      <span>Peaberry Robusta Malang</span><span class="dot">•</span>
+      <span>Arabika Kintamani</span><span class="dot">•</span>
+      <span>Arabika Gayo</span><span class="dot">•</span>
+      <span>Robusta Dampit</span><span class="dot">•</span>
+      <span>Arabika Ijen Bondowoso</span><span class="dot">•</span>
+      <span>Robusta Kawi Malang</span><span class="dot">•</span>
+      <span>Peaberry Robusta Malang</span><span class="dot">•</span>
+      <span>Arabika Kintamani</span><span class="dot">•</span>
+      <span>Arabika Gayo</span><span class="dot">•</span>
+      <span>Robusta Dampit</span><span class="dot">•</span>
+      <span>Arabika Ijen Bondowoso</span><span class="dot">•</span>
+      <span>Robusta Kawi Malang</span><span class="dot">•</span>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Mengapa Sidomulyo</div>
+      <h2>Setiap kantong menyimpan proses yang tidak terburu-buru.</h2>
+      <p>Dari pemilihan biji hingga penyangraian, kami menjaga standar yang sama seperti saat toko ini pertama kali membuka pintunya di Malang.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 12.5 11 15l4.5-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>100% Murni</h3>
+        <p>Kopi pilihan berkualitas, tanpa campuran biji atau bahan lain.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20 10 8l4 6 2-3 4 9H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <h3>Dataran Tinggi</h3>
+        <p>Berasal dari kebun terbaik Malang, Kintamani, Gayo, dan Ijen.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9h11a2 2 0 0 1 2 2c0 3-2 5-5.5 5H9C6.5 16 5 14 5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 9c0-2 1-3 1-4M12 9c0-2 1-3 1-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 19h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Aroma Kuat</h3>
+        <p>Wangi, bold, dan menggugah semangat di setiap seduhan.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3c4 2 8 1.5 8 1.5S20 15 12 21C4 15 4 4.5 4 4.5S8 5 12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <h3>Kualitas Terbaik</h3>
+        <p>Biji kopi pilihan dengan proses sangrai yang terjamin konsisten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="katalog">
+  <div class="wrap">
+    <div class="catalog-head">
+      <div class="section-head" style="margin-bottom:0;">
+        <div class="eyebrow">Katalog Produk</div>
+        <h2>Pilih rasa, nikmati kualitasnya.</h2>
+      </div>
+      <div class="filter-row">
+        <span class="chip active" data-f="all">Semua</span>
+        <span class="chip" data-f="arabika">Arabika</span>
+        <span class="chip" data-f="robusta">Robusta</span>
+        <span class="chip" data-f="bubuk">Kopi Bubuk</span>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- 1 -->
+      <div class="card" data-cat="robusta">
+        <div class="card-media">
+          <img src="images/peaberry-robusta-malang.png" alt="Peaberry Lanang Robusta Malang">
+          <span class="card-tag"><span class="swatch" style="background:#8FA84E"></span>Robusta</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Malang, Jawa Timur</div>
+          <h3>Peaberry Lanang Robusta Malang</h3>
+          <p>Biji kopi langka berbentuk bulat penuh, rasa pekat dan aroma yang lebih intens dari kopi biasa.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Ground</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Peaberry%20Lanang%20Robusta%20Malang" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="card" data-cat="arabika">
+        <div class="card-media">
+          <img src="images/arabika-kintamani.png" alt="Special Arabika Kintamani">
+          <span class="card-tag"><span class="swatch" style="background:#6B3FA0"></span>Arabika</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Kintamani, Bali</div>
+          <h3>Special Arabika Kintamani</h3>
+          <p>Tumbuh di dataran tinggi Bali, karakter rasa kompleks dengan aroma floral yang menenangkan.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Ground</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Special%20Arabika%20Kintamani" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="card" data-cat="arabika">
+        <div class="card-media">
+          <img src="images/arabika-gayo.png" alt="Special Arabika Gayo">
+          <span class="card-tag"><span class="swatch" style="background:#A31E22"></span>Arabika</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Gayo, Aceh</div>
+          <h3>Special Arabika Gayo</h3>
+          <p>Kopi legendaris dari dataran tinggi Gayo, aroma floral, coklat, dan fruity yang khas.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Peaberry</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Special%20Arabika%20Gayo" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="card" data-cat="robusta">
+        <div class="card-media">
+          <img src="images/robusta-dampit.png" alt="Special Robusta Dampit">
+          <span class="card-tag"><span class="swatch" style="background:#E08E1D"></span>Robusta</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Dampit, Malang</div>
+          <h3>Special Robusta Dampit</h3>
+          <p>Rasa tegas dan pekat dengan body kental, aroma strong dan bold yang tahan lama.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Ground</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Special%20Robusta%20Dampit" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="card" data-cat="bubuk">
+        <div class="card-media">
+          <img src="images/kopi-bubuk-robusta-malang.png" alt="Kopi Bubuk Robusta Malang">
+          <span class="card-tag"><span class="swatch" style="background:#4A2F22"></span>Bubuk</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Tjap Cikal · Sejak 1982</div>
+          <h3>Kopi Bubuk Robusta Malang</h3>
+          <p>Resep warisan turun-temurun, praktis diseduh tubruk dengan rasa kuat yang menggugah.</p>
+          <div class="card-foot">
+            <span class="roast">Bubuk Siap Seduh</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Bubuk%20Robusta%20Malang%20Sidomulyo" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="card" data-cat="arabika">
+        <div class="card-media">
+          <img src="images/premium-arabika-malang.png" alt="Premium Arabika Malang">
+          <span class="card-tag"><span class="swatch" style="background:#4F8FC0"></span>Arabika</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Malang, Jawa Timur</div>
+          <h3>Premium Arabika Malang</h3>
+          <p>Karakter halus dan seimbang, aroma lembut, floral, dan fruity nan elegan.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Ground</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Premium%20Arabika%20Malang" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="card" data-cat="robusta">
+        <div class="card-media">
+          <img src="images/robusta-kawi-malang.png" alt="Premium Robusta Kawi Malang">
+          <span class="card-tag"><span class="swatch" style="background:#C99A3E"></span>Robusta</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Gunung Kawi, Malang</div>
+          <h3>Premium Robusta Kawi Malang</h3>
+          <p>Body kental, after taste tahan lama, aroma kuat, bold, dan nikmat.</p>
+          <div class="card-foot">
+            <span class="roast">Roasted Bean / Ground</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Premium%20Robusta%20Kawi%20Malang" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="card" data-cat="arabika">
+        <div class="card-media">
+          <img src="images/arabika-malang-dark-roast.png" alt="Special Arabika Malang Dark Roast">
+          <span class="card-tag"><span class="swatch" style="background:#2C5B8C"></span>Arabika</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Gunung Arjuna, Jawa Timur</div>
+          <h3>Special Arabika Malang</h3>
+          <p>Dark roast dengan body tebal dan rasa intens — pilihan tepat untuk espresso.</p>
+          <div class="card-foot">
+            <span class="roast">Dark Roast · Espresso</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Special%20Arabika%20Malang%20Dark%20Roast" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="card" data-cat="arabika">
+        <div class="card-media">
+          <img src="images/arabika-ijen-bondowoso.png" alt="Special Arabika Ijen Bondowoso">
+          <span class="card-tag"><span class="swatch" style="background:#1A1A1A"></span>Arabika</span>
+          <span class="card-netto">250 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Ijen, Bondowoso</div>
+          <h3>Special Arabika Ijen Bondowoso</h3>
+          <p>Proses full wash, rasa bersih dan seimbang dengan medium roast yang pas.</p>
+          <div class="card-foot">
+            <span class="roast">Full Wash · Medium Roast</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Kopi%20Sidomulyo%20Special%20Arabika%20Ijen%20Bondowoso" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="card" data-cat="robusta">
+        <div class="card-media">
+          <img src="images/roasted-bean-robusta-malang.png" alt="Roasted Bean Robusta Malang">
+          <span class="card-tag"><span class="swatch" style="background:#2F6B3D"></span>Robusta</span>
+          <span class="card-netto">500 gr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-origin">Malang · Sejak 1982 · Halal</div>
+          <h3>Roasted Bean Robusta Malang</h3>
+          <p>Biji sangrai utuh untuk digiling sesuai selera, ukuran ekonomis 500 gram.</p>
+          <div class="card-foot">
+            <span class="roast">Biji Utuh</span>
+            <a class="card-cta" href="https://wa.me/6280000000000?text=Halo%2C%20saya%20mau%20pesan%20Roasted%20Bean%20Robusta%20Malang%20Sidomulyo" target="_blank" rel="noopener">Pesan <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="tentang">
+  <div class="wrap about-grid">
+    <div class="about-media">
+      <img src="images/roasted-bean-robusta-malang.png" alt="Proses Sangrai Kopi Sidomulyo">
+    </div>
+    <div>
+      <div class="eyebrow">Cerita Kami</div>
+      <h2>Dari alat sangrai kayu, menjadi kepercayaan lintas generasi.</h2>
+      <p>Toko Kopi Sidomulyo berdiri sejak 1968 di Malang, Jawa Timur. Bermula dari kopi bubuk racikan rumahan bermerek "Tjap Cikal" pada 1982, usaha ini tumbuh menjadi produsen kopi dengan sembilan varian Arabika dan Robusta pilihan dari berbagai dataran tinggi Nusantara.</p>
+      <p>Setiap biji kopi kami sangrai dengan proses yang konsisten, menjaga keseimbangan rasa dan aroma yang sama seperti yang dinikmati pelanggan generasi pertama kami.</p>
+      <ul class="about-list">
+        <li><span class="num">01</span><span>Biji kopi dipilih langsung dari petani di dataran tinggi Malang, Bali, Aceh, dan Bondowoso.</span></li>
+        <li><span class="num">02</span><span>Disangrai bertahap sesuai karakter tiap biji — dari medium hingga dark roast.</span></li>
+        <li><span class="num">03</span><span>Dikemas kedap udara agar kesegaran dan aroma tetap terjaga sampai di tangan Anda.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="testi" id="testimoni">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Testimoni</div>
+      <h2>Kata mereka yang sudah menyeduh Sidomulyo.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Robusta Dampit-nya kuat banget, pas buat yang biasa minum kopi tubruk tiap pagi. Aromanya juga nendang begitu dibuka."</p>
+        <div class="testi-who">
+          <div class="testi-avatar">A</div>
+          <div><div class="name">Andi P.</div><div class="loc">Surabaya</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Arabika Gayo dari sini rasanya bersih dan ada sedikit rasa coklatnya. Packing rapi, sampai masih fresh."</p>
+        <div class="testi-who">
+          <div class="testi-avatar">R</div>
+          <div><div class="name">Rina S.</div><div class="loc">Malang</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Sudah langganan Kopi Bubuk Tjap Cikal sejak dulu, rasanya konsisten dari tahun ke tahun. Recommended!"</p>
+        <div class="testi-who">
+          <div class="testi-avatar">B</div>
+          <div><div class="name">Budi H.</div><div class="loc">Jakarta</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band" id="kontak">
+    <div>
+      <h2>Siap menyeduh kopi favorit Anda?</h2>
+      <p>Chat kami langsung untuk konsultasi varian, pemesanan grosir, atau tanya stok terbaru.</p>
+    </div>
+    <div class="cta-band-actions">
+      <a class="btn btn-gold" href="https://wa.me/6280000000000" target="_blank" rel="noopener">Chat WhatsApp</a>
+      <a class="btn btn-outline" style="border-color:var(--cream); color:var(--cream);" href="#katalog">Lihat Katalog</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M8 2c0 3 3 4 3 7a3 3 0 1 1-6 0c0-3 3-4 3-7Z" stroke="#E8C77E" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <div class="brand-name">Sidomulyo</div>
+        </div>
+        <p class="desc">Toko Kopi Sidomulyo — produsen kopi asli Malang sejak 1968. Kualitas terjamin, rasa istimewa di setiap kemasan.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#katalog">Katalog</a></li>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Varian Populer</h4>
+        <ul>
+          <li><a href="#katalog">Robusta Dampit</a></li>
+          <li><a href="#katalog">Arabika Gayo</a></li>
+          <li><a href="#katalog">Arabika Kintamani</a></li>
+          <li><a href="#katalog">Kopi Bubuk Tjap Cikal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>Malang, Jawa Timur, Indonesia</li>
+          <li>+62 800-0000-000</li>
+          <li>hello@kopisidomulyo.id</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Toko Kopi Sidomulyo. Sejak 1968.</span>
+      <span>Dibuat dengan ☕ di Malang, Jawa Timur.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6280000000000" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.06-1.1.09-1.77-.11-.41-.12-.93-.29-1.6-.57-2.83-1.22-4.67-4.07-4.81-4.26-.14-.19-1.15-1.53-1.15-2.92 0-1.39.73-2.07.99-2.35.26-.28.57-.35.76-.35h.55c.18 0 .42-.07.65.5.24.58.82 2 .89 2.14.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.07.95 1.96 1.25 2.24 1.39.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.6-.14.24.09 1.53.72 1.79.85.26.14.44.2.5.32.06.11.06.65-.18 1.33Z"/></svg>
+</a>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.card');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.f;
+      cards.forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
